@@ -1,8 +1,12 @@
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-**/src/main/resources/datasource.properties
+**/src/main/resources/datasource_guest.properties
+**/src/main/resources/datasource_std.properties
+**/src/main/resources/datasource_prof.properties
+**/src/main/resources/datasource_admin.properties
 **/src/main/resources/security.properties
+**/src/test/**
 
 ### STS ###
 .apt_generated

@@ -5,7 +5,7 @@ import lombok.NonNull;
 
 @Data
 public class Professor extends User {
-	private @NonNull String prof_id, name, email;
-	private @NonNull Boolean isEnabled;
-	private @NonNull String authority;
+	public @NonNull String prof_id, name, email;
+	public @NonNull Boolean isEnabled;
+	public @NonNull String authority;
 }

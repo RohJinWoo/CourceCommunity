@@ -5,6 +5,6 @@ import lombok.NonNull;
 
 @Data
 public class Admin extends User {
-	private @NonNull String name;
-	private @NonNull String authority;
+	public @NonNull String name;
+	public @NonNull String authority;
 }

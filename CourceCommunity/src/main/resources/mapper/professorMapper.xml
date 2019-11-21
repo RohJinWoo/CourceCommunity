@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.community.cource.mapper.ProfessorMapper">
+
+	<!-- 1.검색 조건 = id 또는 name
+		2.정렬 여부 = isSort 
+		3.정렬 조건 = idOrder & isDESC -->
+	<select id="SELECT_PROF">
+		SELECT *
+		FROM professor
+		<where>
+			<if test="id != null">id = #{id}</if>
+			<if test="name != null">name = #{name}</if>
+		</where>
+		<if test="isSort">
+			ORDER BY
+			<choose>
+				<when test="idOrder">id</when>
+				<when test="!idOrder">name</when>
+				<when test="isDESC">DESC</when>
+			</choose>
+		</if>
+	</select>
+	
+	<insert id="INSERT_PROF">
+		INSERT INTO professor(p_id, id, name, password, email, isEnabled, createdAt, updatedAt, authority)
+		VALUES(#{prof_id}, #{id}, #{name}, #{pw}, #{email}, true, now(), null, "professor")
+	</insert>
+	
+	<!-- 1.변경값 = pw 또는 email
+		2.변경조건 = [isEnabled & id] 또는 email 또는 id -->
+	<update id="UPDATE_PROF">
+		UPDATE professor
+		<set>
+			updatedAt = now()
+			<if test="pw != null">AND password = #{pw}</if>
+			<if test="email != null">AND email = #{email}</if>
+		</set>
+		<where>
+			<choose>
+				<when test="!isEnabled">isEnabled = #{isEnabled} AND id = #{id}</when>
+				<when test="email != null">email = #{email}</when>
+				<when test="id != null">id = #{id}</when>
+			</choose>
+		</where>
+	</update>
+	
+	<delete id="DELETE_PROF">
+		<if test="id != null">
+			DELETE FROM professor
+			WHERE id = #{id}
+		</if>
+	</delete>
+</mapper>

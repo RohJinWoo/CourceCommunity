@@ -5,5 +5,5 @@ import lombok.NonNull;
 
 @Data
 public class User {
-	private @NonNull String id, pw;
+	public @NonNull String id, pw;
 }
